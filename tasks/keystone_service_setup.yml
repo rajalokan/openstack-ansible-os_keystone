@@ -35,7 +35,7 @@
 
 - name: Bootstrap keystone admin and endpoint
   command: |
-     {{ keystone_bin }}/keystone-manage bootstrap \
+     su -s /bin/sh -c "{{ keystone_bin }}/keystone-manage bootstrap \
      --bootstrap-username {{ keystone_admin_user_name }} \
      --bootstrap-password {{ keystone_auth_admin_password }} \
      --bootstrap-project-name {{ keystone_admin_tenant_name }} \
@@ -44,9 +44,9 @@
      --bootstrap-region-id {{ keystone_service_region }} \
      --bootstrap-admin-url {{ keystone_service_adminurl }} \
      --bootstrap-public-url {{ keystone_service_publicurl }} \
-     --bootstrap-internal-url {{ keystone_service_internalurl }}
+     --bootstrap-internal-url {{ keystone_service_internalurl }}" "{{ keystone_system_user_name }}"
   become: yes
-  become_user: "{{ keystone_system_user_name }}"
+  # become_user: "{{ keystone_system_user_name }}"
   register: add_service
   until: add_service|success
   retries: 5

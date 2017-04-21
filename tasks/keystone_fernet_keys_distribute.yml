@@ -22,6 +22,6 @@
           {{ keystone_system_user_name }}@{{ hostvars[item]['ansible_ssh_host'] }}:{{ keystone_fernet_tokens_key_repository }}/
   become: yes
   become_user: "{{ keystone_system_user_name }}"
-  with_items: groups['keystone_all'][1:]
+  with_items: "{{ groups['keystone_all'][1:] }}"
   tags:
     - keystone-fernet-distribute

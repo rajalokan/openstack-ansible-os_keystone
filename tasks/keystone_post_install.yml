@@ -14,14 +14,14 @@
 # limitations under the License.
 
 - name: Copy keystone config
-  config_template:
+  template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: "{{ keystone_system_user_name }}"
     group: "{{ keystone_system_group_name }}"
     mode: "0644"
-    config_overrides: "{{ item.config_overrides }}"
-    config_type: "{{ item.config_type }}"
+    # config_overrides: "{{ item.config_overrides }}"
+    # config_type: "{{ item.config_type }}"
   with_items:
     - src: "keystone.conf.j2"
       dest: "/etc/keystone/keystone.conf"

@@ -26,7 +26,7 @@
     name: "{{ item }}"
     state: "present"
     system: "yes"
-  with_items: keystone_system_additional_groups
+  with_items: "{{ keystone_system_additional_groups }}"
   tags:
     - keystone-group
 

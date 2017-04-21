@@ -72,7 +72,7 @@
   until: install_packages|success
   retries: 5
   delay: 2
-  with_items: keystone_requires_pip_packages
+  with_items: "{{ keystone_requires_pip_packages }}"
   tags:
     - keystone-install
     - keystone-pip-packages
@@ -190,7 +190,7 @@
   until: install_packages|success
   retries: 5
   delay: 2
-  with_items: keystone_pip_packages
+  with_items: "{{ keystone_pip_packages }}"
   when:
     - keystone_venv_enabled | bool
     - keystone_get_venv | failed or keystone_developer_mode | bool
@@ -209,7 +209,7 @@
   until: install_packages|success
   retries: 5
   delay: 2
-  with_items: keystone_pip_packages
+  with_items: "{{ keystone_pip_packages }}"
   when:
     - not keystone_developer_mode | bool
     - not keystone_venv_enabled | bool
